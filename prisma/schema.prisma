@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  phone     String?
+  role      Role     @default(LEAD)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Phase 1: Control
+  state             LeadState @default(NEW)
+  automationEnabled Boolean   @default(true)
+  humanRequired     Boolean   @default(false)
+  
+  leadLogs          LeadLog[]
+  assessments       Assessment[]
+  applications      Application[]
+  payments          Payment[]
+}
+
+enum Role {
+  LEAD
+  ADMIN
+  STUDENT
+}
+
+enum LeadState {
+  NEW
+  ASSESSMENT_COMPLETED
+  NURTURING
+  ONLINE_CLIENT
+  APPLIED_PHYSICAL
+  ACCEPTED
+  CLIENT
+}
+
+model LeadLog {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  previousState LeadState
+  newState      LeadState
+  reason        String?
+  createdAt     DateTime  @default(now())
+}
+
+model MessageTemplate {
+  id           String     @id @default(uuid())
+  name         String     @unique
+  content      String     @db.Text
+  variables    Json?      // ["first_name", "program_name"]
+  isActive     Boolean    @default(true)
+  triggerState LeadState? // Which state triggers this?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Assessment {
+  id        String   @id @default(uuid())
+  score     Int
+  answers   Json
+  result    String   // Category/Result
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Application {
+  id        String   @id @default(uuid())
+  program   String   // "Group Intensive", "Private", etc.
+  status    AppStatus @default(PENDING)
+  details   Json     // Form data
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  // Phase 2: Revenue Logic
+  score        AppScore  @default(UNSCORED)
+  scoreDetails Json?     // Breakdown of scoring
+  paymentLink  String?
+  paymentExpiresAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum AppStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WAITLIST
+}
+
+enum AppScore {
+  STRONG
+  MAYBE
+  NOT_READY
+  UNSCORED
+}
+
+model MentorshipVideo {
+  id          String    @id @default(uuid())
+  title       String
+  description String?   @db.Text
+  url         String    // YouTube/Vimeo embed URL
+  thumbnail   String?
+  minState    LeadState @default(CLIENT) // Minimum state required to view
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  programType   String   // "online", "physical", etc.
+  amount        Float
+  status        PaymentStatus @default(PENDING)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}

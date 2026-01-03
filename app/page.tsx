@@ -1,65 +1,188 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, CheckCircle, Users, Zap, Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'LPBA Consulting',
+    url: 'https://lpba-consulting.com',
+    logo: 'https://lpba-consulting.com/logo.png',
+    description: 'The Leadership Brand Positioning & Automation System designed for high-impact leaders.',
+    sameAs: [
+      'https://twitter.com/lpba_consulting',
+      'https://linkedin.com/company/lpba-consulting',
+    ],
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  const stagger = {
+    visible: { transition: { staggerChildren: 0.2 } }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex flex-col min-h-screen">
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <Link className="flex items-center justify-center gap-2" href="/">
+          <div className="w-8 h-8 bg-black text-white flex items-center justify-center rounded-lg font-bold font-display">L</div>
+          <span className="font-bold text-xl tracking-tight font-display">LPBA Consulting</span>
+        </Link>
+        <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/assessment">
+            Assessment
+          </Link>
+          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/application">
+            Apply
+          </Link>
+          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/login">
+            Login
+          </Link>
+        </nav>
+      </header>
+      <main className="flex-1">
+        <section className="w-full py-20 md:py-32 bg-black text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+          <div className="container px-4 md:px-6 relative z-10">
+            <motion.div 
+              initial="hidden" 
+              animate="visible" 
+              variants={stagger}
+              className="flex flex-col items-center space-y-8 text-center"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              <motion.div variants={fadeInUp} className="space-y-4 max-w-3xl">
+                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-display">
+                  Scale Your Influence. <br className="hidden sm:inline" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Automate Your Revenue.</span>
+                </h1>
+                <p className="mx-auto max-w-[700px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  The Leadership Brand Positioning & Automation System designed for high-impact leaders. Qualify leads, nurture relationships, and close high-ticket offers on autopilot.
+                </p>
+              </motion.div>
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 min-w-[200px]">
+                <Link href="/assessment">
+                  <Button className="w-full sm:w-auto bg-white text-black hover:bg-gold hover:text-black text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300" size="lg">
+                    Take Free Assessment
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/application">
+                  <Button variant="outline" className="w-full sm:w-auto bg-transparent text-white border-white hover:bg-white hover:text-black text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300">
+                    View Programs
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+          <div className="container px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">Why Choose LPBA Consulting?</h2>
+              <p className="mx-auto max-w-[600px] text-gray-500 md:text-lg mt-4">
+                We bridge the gap between your expertise and the revenue you deserve.
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-3">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader>
+                    <div className="p-3 bg-blue-100 w-fit rounded-xl mb-4">
+                      <Zap className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <CardTitle className="text-xl font-display">Automated Qualification</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-500 leading-relaxed">
+                      Stop wasting time on unqualified leads. Our intelligent assessment engine filters prospects and routes them to the perfect offer automatically.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.2, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader>
+                    <div className="p-3 bg-purple-100 w-fit rounded-xl mb-4">
+                      <Users className="h-8 w-8 text-purple-600" />
+                    </div>
+                    <CardTitle className="text-xl font-display">Elite Community</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-500 leading-relaxed">
+                      Join a network of driven leaders. Access exclusive resources, peer mentorship, and high-level networking opportunities.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.3, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader>
+                    <div className="p-3 bg-green-100 w-fit rounded-xl mb-4">
+                      <CheckCircle className="h-8 w-8 text-green-600" />
+                    </div>
+                    <CardTitle className="text-xl font-display">Revenue Systems</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-500 leading-relaxed">
+                      Implement proven funnels that convert. From low-ticket digital products to high-ticket masterminds, we have the blueprint.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="w-full py-20 bg-black text-white text-center">
+             <div className="container px-4 md:px-6">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-6 font-display">Ready to Transform Your Leadership?</h2>
+                <Link href="/assessment">
+                  <Button className="bg-white text-black hover:bg-gold text-lg px-10 py-6 h-auto rounded-full font-bold transition-colors duration-300">
+                    Start Your Journey Now
+                  </Button>
+                </Link>
+             </div>
+        </section>
       </main>
+      <footer className="flex flex-col gap-4 sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6 border-t bg-gray-50">
+        <p className="text-sm text-gray-500">© 2026 LPBA Consulting. All rights reserved.</p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-sm text-gray-500 hover:underline underline-offset-4" href="#">
+            Terms of Service
+          </Link>
+          <Link className="text-sm text-gray-500 hover:underline underline-offset-4" href="#">
+            Privacy Policy
+          </Link>
+        </nav>
+      </footer>
     </div>
   );
 }
