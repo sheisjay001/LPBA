@@ -2,8 +2,13 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { PaystackButton } from "react-paystack";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
+
+const PaystackButton = dynamic(
+  () => import("react-paystack").then((mod) => mod.PaystackButton),
+  { ssr: false }
+);
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
