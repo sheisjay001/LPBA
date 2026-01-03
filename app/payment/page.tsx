@@ -27,9 +27,23 @@ function PaymentForm() {
     email,
     amount: amountInKobo,
     metadata: {
-      name,
-      phone,
-      plan,
+      custom_fields: [
+        {
+          display_name: "Full Name",
+          variable_name: "name",
+          value: name,
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone",
+          value: phone,
+        },
+        {
+          display_name: "Plan",
+          variable_name: "plan",
+          value: plan || "default",
+        },
+      ],
     },
     publicKey,
     text: "Pay Now",
