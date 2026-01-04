@@ -17,6 +17,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Auth & Recovery
+  resetToken       String?   @unique
+  resetTokenExpiry DateTime?
+
   // Phase 1: Control
   state             LeadState @default(NEW)
   automationEnabled Boolean   @default(true)
@@ -101,37 +105,29 @@ enum AppStatus {
 }
 
 enum AppScore {
-  STRONG
-  MAYBE
-  NOT_READY
   UNSCORED
-}
-
-model MentorshipVideo {
-  id          String    @id @default(uuid())
-  title       String
-  description String?   @db.Text
-  url         String    // YouTube/Vimeo embed URL
-  thumbnail   String?
-  minState    LeadState @default(CLIENT) // Minimum state required to view
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  WEAK
+  MODERATE
+  STRONG
 }
 
 model Payment {
-  id            String   @id @default(uuid())
-  userId        String
-  user          User     @relation(fields: [userId], references: [id])
-  programType   String   // "online", "physical", etc.
+  id            String        @id @default(uuid())
   amount        Float
+  currency      String        @default("NGN")
+  reference     String        @unique
   status        PaymentStatus @default(PENDING)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  provider      String        @default("PAYSTACK")
+  
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 enum PaymentStatus {
   PENDING
   SUCCESS
   FAILED
-  REFUNDED
 }

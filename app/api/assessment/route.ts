@@ -31,6 +31,18 @@ export async function POST(request: Request) {
       create: { email, name, phone, state: 'NEW' },
     });
 
+    // Generate Reset Token for Welcome/Account Setup
+    const crypto = require('crypto');
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetTokenExpiry = new Date(Date.now() + 24 * 3600000); // 24 hours
+    
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { resetToken, resetTokenExpiry }
+    });
+
+    const resetLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/reset-password?token=${resetToken}`;
+
     // Update State to ASSESSMENT_COMPLETED
     // We swallow errors if state transition fails (e.g. user is already a CLIENT retaking assessment)
     try {
@@ -70,22 +82,30 @@ export async function POST(request: Request) {
                 <p><strong>Your Result:</strong> ${result}</p>
                 <p><strong>Recommended Path:</strong> ${recommendation}</p>
                 <br>
+                <p>To access your personal dashboard and view detailed results, please set your secure password:</p>
+                <a href="${resetLink}" style="display: inline-block; padding: 12px 24px; background-color: #C2956E; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0;">Access Dashboard</a>
+                <br>
                 <p>Best regards,<br>LPBA Consulting Team</p>
             </div>
         `;
     } else {
         // Fallback if template missing
         emailHtml = `
-            <h1>Hi ${name},</h1>
-            <p>Thank you for taking the LPBA Assessment.</p>
-            <p><strong>Your Result:</strong> ${result}</p>
-            <p><strong>Recommended Path:</strong> ${recommendation}</p>
-            <p>Click <a href="https://lpba-consulting.com/application">here</a> to apply for the next steps.</p>
+            <div style="font-family: sans-serif; color: #333;">
+                <h1>Hi ${name},</h1>
+                <p>Thank you for taking the LPBA Assessment.</p>
+                <p><strong>Your Result:</strong> ${result}</p>
+                <p><strong>Recommended Path:</strong> ${recommendation}</p>
+                <p>Click <a href="https://lpba-consulting.com/application">here</a> to apply for the next steps.</p>
+                <br>
+                <p>To access your personal dashboard, please set your secure password:</p>
+                <a href="${resetLink}" style="display: inline-block; padding: 12px 24px; background-color: #C2956E; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0;">Access Dashboard</a>
+            </div>
         `;
     }
 
     // Send Email
-    await sendEmail({ to: email, subject: `Your LPBA Assessment Result: ${result}`, html: emailHtml });
+    await sendEmail(email, `Your LPBA Assessment Result: ${result}`, emailHtml);
 
     return NextResponse.json({
       success: true,

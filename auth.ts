@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { prisma } from "@/lib/prisma"
+import bcrypt from "bcryptjs"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -14,31 +15,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null
         }
 
-        // 1. Admin Login (Hardcoded)
-        if (credentials.email === "admin@lpba.com" && credentials.password === "admin123") {
-          const user = await prisma.user.findUnique({
-            where: { email: "admin@lpba.com" },
-          })
-          
-          if (user && user.role === "ADMIN") {
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email as string },
+        })
+
+        if (!user) return null
+
+        // Migration for Admin: If admin has no password set (or legacy), allow "admin123" and hash it immediately
+        if (user.role === "ADMIN" && !user.password && credentials.password === "admin123") {
+            const hashedPassword = await bcrypt.hash("admin123", 10);
+            await prisma.user.update({
+                where: { id: user.id },
+                data: { password: hashedPassword }
+            });
             return {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              role: user.role,
-            }
-          }
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+            };
         }
 
-        // 2. Regular User Login (Demo Mode)
-        // Since we don't store passwords for users yet, we use a default password "user123" for all non-admin users
-        // This allows testing the user dashboard with any valid email in the system.
-        if (credentials.password === "user123") {
-            const user = await prisma.user.findUnique({
-                where: { email: credentials.email as string }
-            });
-
-            if (user) {
+        // Secure Password Verification
+        if (user.password) {
+            const isValid = await bcrypt.compare(credentials.password as string, user.password);
+            if (isValid) {
                 return {
                     id: user.id,
                     name: user.name,

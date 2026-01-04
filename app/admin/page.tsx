@@ -278,7 +278,17 @@ export default function AdminDashboard() {
         <TabsContent value="leads">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Recent Leads</CardTitle>
+              <div className="flex items-center gap-4">
+                <CardTitle>Recent Leads</CardTitle>
+                <div className="relative w-64">
+                    <Input 
+                        placeholder="Search by name, email, phone..." 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="h-9"
+                    />
+                </div>
+              </div>
               <Button variant="outline" size="sm" onClick={handleExportCSV}>
                 Export CSV
               </Button>
@@ -301,7 +311,11 @@ export default function AdminDashboard() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {leads.map((lead) => {
+                  {leads.filter(lead => 
+                    lead.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    lead.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    lead.phone?.includes(searchQuery)
+                  ).map((lead) => {
                     const phase = ['NEW', 'ASSESSMENT_COMPLETED'].includes(lead.state) ? 'Qualify' :
                                   ['NURTURING', 'ONLINE_CLIENT', 'APPLIED_PHYSICAL'].includes(lead.state) ? 'Nurture' :
                                   ['ACCEPTED', 'CLIENT'].includes(lead.state) ? 'Close' : lead.state;
