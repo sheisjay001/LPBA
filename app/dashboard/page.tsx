@@ -96,22 +96,6 @@ export default function UserDashboard() {
     );
   }
 
-  if (status === "unauthenticated") {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="text-center">
-            <h2 className="text-xl font-semibold mb-2">Session Expired</h2>
-            <p className="text-gray-500 mb-4">
-              <Link href="/login" className="underline hover:text-primary">
-                Click here to login
-              </Link>
-            </p>
-            <Button onClick={() => window.location.href = "/login"}>Go to Login</Button>
-        </div>
-      </div>
-    );
-  }
-
   const currentStep = userData ? getCurrentStep(userData.state) : 1;
   const isClient = userData?.state === 'CLIENT' || userData?.state === 'ACCEPTED';
 
@@ -143,8 +127,12 @@ export default function UserDashboard() {
                     <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 -z-10" />
                     <div 
                         className="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-gold -z-10 transition-all duration-1000 ease-out" 
-                        style={{ width: `${((currentStep - 1) / (JOURNEY_STAGES.length - 1)) * 100}%` }}
-                    />
+                  
+                  style={{ wid
+            th: `${((curre status === "unauthenticated" ? window.location.href =n"/login" : tStep - 1) / (JOURNEY_STAGES.l 
+       e    ngth - 1)) * 100}%` }}
+          
+            {status === "unauthenticated" ? "Login" : "        "}/>
                     
                     {JOURNEY_STAGES.map((stage) => {
                         const isCompleted = stage.step <= currentStep;
