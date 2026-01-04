@@ -71,7 +71,6 @@ Automation should pause when:
 - User requests a call
 - User mentions physical programs
 - Admin manually flags the lead
-
 Only admins can re-enable automation.
 
 Why this exists:

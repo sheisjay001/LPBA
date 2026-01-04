@@ -9,6 +9,7 @@ import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { CheckCircle2, Circle, Lock, PlayCircle, FileText } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const JOURNEY_STAGES = [
   { id: 'QUALIFY', label: 'Qualify', step: 1, states: ['NEW', 'ASSESSMENT_COMPLETED'] },
@@ -17,12 +18,14 @@ const JOURNEY_STAGES = [
 ];
 
 export default function UserDashboard() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [userData, setUserData] = useState<any>(null);
   const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (status === "loading") return;
+
     if (session?.user?.email) {
       setLoading(true);
       // Fetch User Data
@@ -51,15 +54,38 @@ export default function UserDashboard() {
             toast.error("Could not load video library.");
         })
         .finally(() => setLoading(false));
+    } else {
+        setLoading(false);
     }
-  }, [session]);
+  }, [session, status]);
 
   const getCurrentStep = (state: string) => {
     const stage = JOURNEY_STAGES.find(s => s.states.includes(state));
     return stage ? stage.step : 1;
   };
 
-  if (!session) return null; // Middleware handles redirect
+  if (status === "loading" || loading) {
+    return (
+      <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="flex justify-between items-center">
+            <div className="space-y-2">
+              <Skeleton className="h-10 w-64" />
+              <Skeleton className="h-4 w-96" />
+            </div>
+            <Skeleton className="h-10 w-24" />
+          </div>
+          <Skeleton className="h-48 w-full rounded-xl" />
+          <div className="grid gap-6 md:grid-cols-3">
+            <Skeleton className="h-64 col-span-2 rounded-xl" />
+            <Skeleton className="h-64 rounded-xl" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") return null; // Middleware handles redirect
 
   const currentStep = userData ? getCurrentStep(userData.state) : 1;
   const isClient = userData?.state === 'CLIENT' || userData?.state === 'ACCEPTED';
@@ -91,7 +117,7 @@ export default function UserDashboard() {
                 <div className="relative flex items-center justify-between w-full">
                     <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 -z-10" />
                     <div 
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-primary -z-10 transition-all duration-1000 ease-out" 
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-gold -z-10 transition-all duration-1000 ease-out" 
                         style={{ width: `${((currentStep - 1) / (JOURNEY_STAGES.length - 1)) * 100}%` }}
                     />
                     
@@ -100,13 +126,17 @@ export default function UserDashboard() {
                         const isCurrent = stage.step === currentStep;
                         
                         return (
-                            <div key={stage.id} className="flex flex-col items-center bg-white p-2 rounded-lg z-10">
-                                {isCompleted ? (
-                                    <CheckCircle2 className="h-8 w-8 text-primary fill-primary/20" />
-                                ) : (
-                                    <Circle className="h-8 w-8 text-gray-300" />
-                                )}
-                                <span className={`text-sm font-medium mt-2 ${isCurrent ? 'text-primary' : 'text-gray-500'}`}>
+                            <div key={stage.id} className="flex flex-col items-center gap-2 bg-white px-2">
+                                <div 
+                                    className={`
+                                        w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300
+                                        ${isCompleted ? 'bg-gold border-gold text-white' : 'bg-white border-gray-300 text-gray-300'}
+                                        ${isCurrent ? 'ring-4 ring-gold/20 scale-110' : ''}
+                                    `}
+                                >
+                                    {isCompleted ? <CheckCircle2 size={16} /> : <Circle size={16} />}
+                                </div>
+                                <span className={`text-xs font-medium hidden md:block ${isCompleted ? 'text-gold' : 'text-gray-400'}`}>
                                     {stage.label}
                                 </span>
                             </div>
