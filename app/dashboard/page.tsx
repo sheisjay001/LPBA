@@ -127,12 +127,8 @@ export default function UserDashboard() {
                     <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 -z-10" />
                     <div 
                         className="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-gold -z-10 transition-all duration-1000 ease-out" 
-                  
-                  style={{ wid
-            th: `${((curre status === "unauthenticated" ? window.location.href =n"/login" : tStep - 1) / (JOURNEY_STAGES.l 
-       e    ngth - 1)) * 100}%` }}
-          
-            {status === "unauthenticated" ? "Login" : "        "}/>
+                        style={{ width: `${((currentStep - 1) / (JOURNEY_STAGES.length - 1)) * 100}%` }}
+                    />
                     
                     {JOURNEY_STAGES.map((stage) => {
                         const isCompleted = stage.step <= currentStep;
