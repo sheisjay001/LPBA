@@ -21,6 +21,7 @@ const JOURNEY_STAGES = [
 
 export default function UserDashboard() {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const [userData, setUserData] = useState<any>(null);
   const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
