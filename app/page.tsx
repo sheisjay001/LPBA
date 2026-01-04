@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { ArrowRight, CheckCircle, Users, Zap, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const [mobileOpen, setMobileOpen] = useState(false);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -40,7 +42,7 @@ export default function Home() {
           <div className="w-8 h-8 bg-black text-white flex items-center justify-center rounded-lg font-bold font-display">L</div>
           <span className="font-bold text-xl tracking-tight font-display">LPBA Consulting</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto hidden sm:flex gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:text-gold transition-colors" href="/assessment">
             Assessment
           </Link>
@@ -54,7 +56,64 @@ export default function Home() {
             Register
           </Link>
         </nav>
+        <button
+          aria-label="Open menu"
+          className="ml-auto inline-flex items-center justify-center rounded-md p-2 text-gray-700 sm:hidden"
+          onClick={() => setMobileOpen(true)}
+        >
+          <Menu className="h-6 w-6" />
+        </button>
       </header>
+      {mobileOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 z-50 sm:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="fixed top-16 left-0 right-0 z-50 bg-white border-b shadow-md sm:hidden">
+            <div className="px-4 py-3 flex items-center justify-between">
+              <span className="font-semibold">Menu</span>
+              <button
+                aria-label="Close menu"
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-700"
+                onClick={() => setMobileOpen(false)}
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <nav className="px-4 pb-4 space-y-2">
+              <Link
+                href="/assessment"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100"
+              >
+                Assessment
+              </Link>
+              <Link
+                href="/application"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100"
+              >
+                Apply
+              </Link>
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100"
+              >
+                Register
+              </Link>
+            </nav>
+          </div>
+        </>
+      )}
       <main className="flex-1">
         <section className="w-full py-20 md:py-32 bg-black text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
@@ -189,7 +248,7 @@ export default function Home() {
                </Card>
 
                {/* Standard Package */}
-               <Card className="bg-white border-2 border-gold h-full flex flex-col relative shadow-xl scale-105 z-10">
+               <Card className="bg-white border-2 border-gold h-full flex flex-col relative shadow-xl md:scale-105 z-10">
                   <div className="absolute top-0 right-0 bg-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                   <CardHeader>
                     <CardTitle className="text-2xl font-display text-primary">Standard</CardTitle>
@@ -228,7 +287,7 @@ export default function Home() {
                     <div>
                         <h2 className="text-3xl font-bold tracking-tighter mb-4 font-display">Bonus Service: The 10X Revenue Launch</h2>
                         <p className="text-gray-600 mb-6 text-lg">
-                            An optional, specialized service available immediately after the core training. We supervise the launch of a marketing campaign to increase your organization’s visibility and patronage.
+                            An optional, specialized service available immediately after the core training. We supervise the launch of a marketing campaign to increase your organization&rsquo;s visibility and patronage.
                         </p>
                         <div className="space-y-4">
                             <div className="flex gap-4">
@@ -237,7 +296,7 @@ export default function Home() {
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg">Goal</h3>
-                                    <p className="text-gray-600">To engineer a 10x increase in your company's monthly revenue benchmark.</p>
+                                    <p className="text-gray-600">To engineer a 10x increase in your company&rsquo;s monthly revenue benchmark.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
