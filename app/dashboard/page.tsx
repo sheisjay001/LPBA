@@ -68,13 +68,6 @@ export default function UserDashboard() {
     return stage ? stage.step : 1;
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      // Use window.location for a hard redirect to ensure session state is cleared
-      window.location.href = "/login";
-    }
-  }, [status]);
-
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
@@ -111,8 +104,8 @@ export default function UserDashboard() {
             </h1>
             <p className="text-muted-foreground mt-2">Track your progress and access your exclusive resources.</p>
           </div>
-          <Button variant="outline" onClick={() => signOut({ callbackUrl: "/" })} className="hover:bg-destructive hover:text-white transition-colors">
-            Sign Out
+          <Button variant="outline" onClick={() => status === "unauthenticated" ? router.push("/login") : signOut({ callbackUrl: "/" })} className="hover:bg-destructive hover:text-white transition-colors">
+            {status === "unauthenticated" ? "Login" : "Sign Out"}
           </Button>
         </div>
 
