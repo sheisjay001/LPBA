@@ -32,16 +32,15 @@ export async function GET() {
 
     // We need total paid (numerator)
     const paidOnline = await prisma.user.count({
-        where: {
-            payments: {
-                some: {
-                    programType: "online",
-                    status: "SUCCESS"
-                }
-            },
-            state: "ONLINE_CLIENT"
-        }
-    });
+            where: {
+                payments: {
+                    some: {
+                        status: "SUCCESS"
+                    }
+                },
+                state: "ONLINE_CLIENT"
+            }
+        });
 
     const conversionRate = eligibleForOnline > 0 ? (paidOnline / eligibleForOnline) * 100 : 0;
 
