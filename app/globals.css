@@ -38,10 +38,11 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-gold: #D4AF37;
-  --color-gold-light: #F4D03F;
-  --color-gold-dark: #B7950B;
-  --color-royal: #1B4F72;
+  --color-gold: #C2956E;
+  --color-gold-light: #D4A77E;
+  --color-gold-dark: #A07855;
+  --color-royal: #1B263B;
+  --color-blue-light: #415A77;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -54,34 +55,34 @@
 :root {
   --radius: 0.625rem;
   /* Light Mode - Luxury Minimalist */
-  --background: oklch(0.99 0 0); /* Pure White */
-  --foreground: oklch(0.12 0 0); /* Soft Black */
+  --background: #F8F9FA; /* Soft White */
+  --foreground: #1B263B; /* Deep Blue as default text */
   
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
+  --card: #FFFFFF;
+  --card-foreground: #1B263B;
   
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
+  --popover: #FFFFFF;
+  --popover-foreground: #1B263B;
   
-  /* Primary: Deep Black for authority */
-  --primary: oklch(0.12 0 0); 
-  --primary-foreground: oklch(0.98 0.02 95); /* Off-white gold tint */
+  /* Primary: Deep Blue */
+  --primary: #1B263B; 
+  --primary-foreground: #F8F9FA; 
   
-  /* Secondary: Soft Gold for elegance */
-  --secondary: oklch(0.95 0.02 95);
-  --secondary-foreground: oklch(0.25 0.05 90);
+  /* Secondary: Soft Gold */
+  --secondary: #C2956E;
+  --secondary-foreground: #F8F9FA;
   
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.50 0 0);
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
   
-  --accent: oklch(0.98 0.01 85);
-  --accent-foreground: oklch(0.12 0 0);
+  --accent: #415A77; /* Lighter Blue */
+  --accent-foreground: #F8F9FA;
   
   --destructive: oklch(0.577 0.245 27.325);
   
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.85 0.05 85); /* Gold ring */
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #C2956E; /* Gold ring */
   
   /* Chart colors remain */
   --chart-1: oklch(0.646 0.222 41.116);
