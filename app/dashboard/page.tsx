@@ -70,9 +70,10 @@ export default function UserDashboard() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/login");
+      // Use window.location for a hard redirect to ensure session state is cleared
+      window.location.href = "/login";
     }
-  }, [status, router]);
+  }, [status]);
 
   if (status === "loading" || loading) {
     return (
