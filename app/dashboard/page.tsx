@@ -11,12 +11,9 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Circle, Lock, PlayCircle, FileText } from "lucide-react";
 
 const JOURNEY_STAGES = [
-  { id: 'NEW', label: 'Lead', step: 1 },
-  { id: 'CONTACTED', label: 'Contacted', step: 2 },
-  { id: 'APPLICANT', label: 'Applicant', step: 3 },
-  { id: 'QUALIFIED', label: 'Interview', step: 4 },
-  { id: 'ACCEPTED', label: 'Accepted', step: 5 },
-  { id: 'CLIENT', label: 'Client', step: 6 },
+  { id: 'QUALIFY', label: 'Qualify', step: 1, states: ['NEW', 'ASSESSMENT_COMPLETED'] },
+  { id: 'NURTURE', label: 'Nurture', step: 2, states: ['NURTURING', 'ONLINE_CLIENT', 'APPLIED_PHYSICAL'] },
+  { id: 'CLOSE', label: 'Close', step: 3, states: ['ACCEPTED', 'CLIENT'] },
 ];
 
 export default function UserDashboard() {
@@ -58,13 +55,14 @@ export default function UserDashboard() {
   }, [session]);
 
   const getCurrentStep = (state: string) => {
-    const stage = JOURNEY_STAGES.find(s => s.id === state) || JOURNEY_STAGES.find(s => state?.includes(s.id));
+    const stage = JOURNEY_STAGES.find(s => s.states.includes(state));
     return stage ? stage.step : 1;
   };
 
   if (!session) return null; // Middleware handles redirect
 
   const currentStep = userData ? getCurrentStep(userData.state) : 1;
+  const isClient = userData?.state === 'CLIENT' || userData?.state === 'ACCEPTED';
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
@@ -86,7 +84,8 @@ export default function UserDashboard() {
         {/* Journey Progress Bar */}
         <Card className="border-none shadow-lg bg-white/80 backdrop-blur">
             <CardHeader>
-                <CardTitle className="text-lg font-serif">Your Journey</CardTitle>
+                <CardTitle className="text-lg font-serif">The LPBA System</CardTitle>
+                <CardDescription>Scale Influence. Automate Revenue.</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="relative flex items-center justify-between w-full">
@@ -101,17 +100,13 @@ export default function UserDashboard() {
                         const isCurrent = stage.step === currentStep;
                         
                         return (
-                            <div key={stage.id} className="flex flex-col items-center gap-2 bg-white px-2">
-                                <div 
-                                    className={`
-                                        w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300
-                                        ${isCompleted ? 'bg-primary border-primary text-primary-foreground' : 'bg-white border-gray-300 text-gray-300'}
-                                        ${isCurrent ? 'ring-4 ring-primary/20 scale-110' : ''}
-                                    `}
-                                >
-                                    {isCompleted ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-                                </div>
-                                <span className={`text-xs font-medium hidden md:block ${isCompleted ? 'text-primary' : 'text-gray-400'}`}>
+                            <div key={stage.id} className="flex flex-col items-center bg-white p-2 rounded-lg z-10">
+                                {isCompleted ? (
+                                    <CheckCircle2 className="h-8 w-8 text-primary fill-primary/20" />
+                                ) : (
+                                    <Circle className="h-8 w-8 text-gray-300" />
+                                )}
+                                <span className={`text-sm font-medium mt-2 ${isCurrent ? 'text-primary' : 'text-gray-500'}`}>
                                     {stage.label}
                                 </span>
                             </div>
@@ -120,6 +115,59 @@ export default function UserDashboard() {
                 </div>
             </CardContent>
         </Card>
+
+        {/* Bonus Service: 10X Revenue Launch */}
+        <div className="grid gap-6 md:grid-cols-3">
+             <Card className="col-span-1 md:col-span-2 bg-gradient-to-br from-primary to-blue-900 text-white border-none shadow-xl">
+                 <CardHeader>
+                     <div className="flex justify-between items-start">
+                         <div>
+                             <Badge className="bg-gold text-black hover:bg-white mb-2">BONUS SERVICE</Badge>
+                             <CardTitle className="text-2xl font-serif text-white">10X Revenue Launch</CardTitle>
+                             <CardDescription className="text-gray-300">Valued at ₦2,500,000 (Complimentary)</CardDescription>
+                         </div>
+                         {isClient ? <CheckCircle2 className="h-8 w-8 text-gold" /> : <Lock className="h-6 w-6 text-gray-400" />}
+                     </div>
+                 </CardHeader>
+                 <CardContent>
+                     <p className="mb-4 text-gray-200">
+                         We supervise the launch of a marketing campaign to increase your organization’s visibility and patronage.
+                         Target: Engineer a 10x increase in monthly revenue.
+                     </p>
+                     <Button 
+                        variant={isClient ? "default" : "secondary"} 
+                        className={isClient ? "bg-gold text-black hover:bg-white" : "bg-gray-700 text-gray-400 cursor-not-allowed"}
+                        disabled={!isClient}
+                     >
+                         {isClient ? "Activate Launch" : "Unlock with Membership"}
+                     </Button>
+                 </CardContent>
+             </Card>
+
+             {/* Current Package Status */}
+             <Card className="bg-white shadow-md">
+                 <CardHeader>
+                     <CardTitle className="text-lg font-serif">Current Package</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                     <div className="text-center py-4">
+                         {isClient ? (
+                             <>
+                                 <div className="text-3xl font-bold text-primary mb-2">Premium</div>
+                                 <p className="text-sm text-gray-500">Market Dominance</p>
+                                 <Badge variant="outline" className="mt-4 border-green-500 text-green-600">Active</Badge>
+                             </>
+                         ) : (
+                             <>
+                                 <div className="text-xl font-bold text-gray-400 mb-2">No Active Package</div>
+                                 <p className="text-sm text-gray-500 mb-4">Complete your assessment to find your fit.</p>
+                                 <Button variant="outline" onClick={() => window.location.href="/application"}>View Packages</Button>
+                             </>
+                         )}
+                     </div>
+                 </CardContent>
+             </Card>
+        </div>
 
         <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-2 p-1 bg-muted/50 rounded-xl">

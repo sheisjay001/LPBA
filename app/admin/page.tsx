@@ -291,7 +291,9 @@ export default function AdminDashboard() {
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Phone</TableHead>
-                    <TableHead>State</TableHead>
+                    <TableHead>Phase</TableHead>
+                    <TableHead>Package</TableHead>
+                    <TableHead>Bonus</TableHead>
                     <TableHead>Automation</TableHead>
                     <TableHead>Latest Result</TableHead>
                     <TableHead>Date</TableHead>
@@ -299,12 +301,30 @@ export default function AdminDashboard() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {leads.map((lead) => (
+                  {leads.map((lead) => {
+                    const phase = ['NEW', 'ASSESSMENT_COMPLETED'].includes(lead.state) ? 'Qualify' :
+                                  ['NURTURING', 'ONLINE_CLIENT', 'APPLIED_PHYSICAL'].includes(lead.state) ? 'Nurture' :
+                                  ['ACCEPTED', 'CLIENT'].includes(lead.state) ? 'Close' : lead.state;
+                    
+                    const pkg = ['ACCEPTED', 'CLIENT'].includes(lead.state) ? 'Premium' : '-';
+                    const bonus = ['ACCEPTED', 'CLIENT'].includes(lead.state) ? 'Active' : 'Locked';
+
+                    return (
                     <TableRow key={lead.id}>
                       <TableCell className="font-medium">{lead.name}</TableCell>
                       <TableCell>{lead.email}</TableCell>
                       <TableCell>{lead.phone}</TableCell>
-                      <TableCell><Badge variant="outline">{lead.state}</Badge></TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={
+                            phase === 'Qualify' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                            phase === 'Nurture' ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                            'bg-green-50 text-green-700 border-green-200'
+                        }>{phase}</Badge>
+                      </TableCell>
+                      <TableCell>{pkg}</TableCell>
+                      <TableCell>
+                        <Badge variant="secondary" className={bonus === 'Active' ? 'bg-gold text-black' : ''}>{bonus}</Badge>
+                      </TableCell>
                       <TableCell>
                         {lead.automationEnabled ? (
                           <span className="text-green-600 text-sm font-medium">Active</span>
@@ -328,7 +348,7 @@ export default function AdminDashboard() {
                         </Button>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ); })}
                 </TableBody>
               </Table>
             </CardContent>
