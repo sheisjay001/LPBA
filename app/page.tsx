@@ -47,6 +47,9 @@ export default function Home() {
           <Link className="text-sm font-medium hover:text-gold transition-colors" href="/application">
             Apply
           </Link>
+          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/login">
+            Login
+          </Link>
           <Link className="text-sm font-medium hover:text-gold transition-colors" href="/register">
             Register
           </Link>

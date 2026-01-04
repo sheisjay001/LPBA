@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { registerUser } from "@/app/actions/auth";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -43,11 +44,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>Create your account to get started.</CardDescription>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-4">
+      <Card className="w-full max-w-md shadow-lg border-t-4 border-t-primary">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-bold tracking-tight">Create an Account</CardTitle>
+          <CardDescription>Enter your details to get started with LPBA.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -60,6 +61,7 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 required
                 placeholder="John Doe"
+                className="bg-white"
               />
             </div>
             <div className="space-y-2">
@@ -72,6 +74,7 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 required
                 placeholder="john@example.com"
+                className="bg-white"
               />
             </div>
             <div className="space-y-2">
@@ -83,15 +86,33 @@ export default function RegisterPage() {
                 value={formData.password} 
                 onChange={handleChange}
                 required
+                className="bg-white"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Creating Account..." : "Register"}
+            
+            <Button type="submit" className="w-full font-semibold" disabled={loading}>
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                  Creating Account...
+                </span>
+              ) : "Register"}
             </Button>
-            <div className="text-xs text-center text-gray-500 mt-4 space-y-2">
-               <p>
-                  Already have an account? <a href="/login" className="text-blue-600 hover:underline">Log in</a>
-               </p>
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+
+            <div className="text-center text-sm text-muted-foreground">
+               Already have an account?{" "}
+               <Link href="/login" className="font-medium text-primary hover:underline">
+                 Log in
+               </Link>
             </div>
           </form>
         </CardContent>
