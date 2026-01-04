@@ -36,8 +36,8 @@ export async function POST(request: Request) {
 
     let finalScore: AppScore = "UNSCORED";
     if (scoreVal >= 8) finalScore = "STRONG";
-    else if (scoreVal >= 4) finalScore = "MAYBE";
-    else finalScore = "NOT_READY";
+    else if (scoreVal >= 4) finalScore = "MODERATE";
+    else finalScore = "WEAK";
 
     // Create or Update User
     const user = await prisma.user.upsert({
