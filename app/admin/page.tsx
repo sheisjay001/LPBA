@@ -23,6 +23,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export default function AdminDashboard() {
   const [leads, setLeads] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [applications, setApplications] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
   const [stats, setStats] = useState<any>(null);
