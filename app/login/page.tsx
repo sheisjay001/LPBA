@@ -31,17 +31,15 @@ export default function LoginPage() {
         toast.error("Invalid credentials. Please try again.");
         setLoading(false);
       } else {
-        toast.success("Login successful! Redirecting...");
+        toast.success("Login successful!");
         router.refresh(); 
         
-        // Short delay to allow toast to show and session to propagate
-        setTimeout(() => {
-             if (email.toLowerCase().includes("admin")) {
-                 window.location.href = "/admin";
-             } else {
-                 window.location.href = "/dashboard";
-             }
-        }, 500);
+        // Redirect based on email/role if needed, but default to dashboard
+        if (email.toLowerCase().includes("admin")) {
+            router.push("/admin");
+        } else {
+            router.push("/dashboard");
+        }
       }
     } catch (err) {
       toast.error("An unexpected error occurred");

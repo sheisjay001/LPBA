@@ -27,6 +27,11 @@ export default function UserDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (status === "unauthenticated") {
+        router.push("/login");
+        return;
+    }
+
     if (status === "loading") return;
 
     if (session?.user?.email) {
@@ -96,18 +101,17 @@ export default function UserDashboard() {
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold font-serif text-primary tracking-tight">
-              Welcome, {userData?.name || session?.user?.name || "Leader"}
-            </h1>
-            <p className="text-muted-foreground mt-2">Track your progress and access your exclusive resources.</p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold font-serif text-primary tracking-tight">
+                Welcome, {userData?.name || session?.user?.name || "Leader"}
+              </h1>
+              <p className="text-muted-foreground mt-2">Track your progress and access your exclusive resources.</p>
+            </div>
+            <Button variant="outline" onClick={() => signOut({ callbackUrl: "/" })} className="hover:bg-destructive hover:text-white transition-colors">
+              Sign Out
+            </Button>
           </div>
-          <Button variant="outline" onClick={() => status === "unauthenticated" ? router.push("/login") : signOut({ callbackUrl: "/" })} className="hover:bg-destructive hover:text-white transition-colors">
-            {status === "unauthenticated" ? "Login" : "Sign Out"}
-          </Button>
-        </div>
 
 
 
