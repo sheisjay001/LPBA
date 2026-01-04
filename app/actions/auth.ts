@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
+import type { Prisma } from '@prisma/client'
 
 const RegisterSchema = z.object({
   name: z.string().min(2),
@@ -18,10 +19,12 @@ export async function registerUser(formData: z.infer<typeof RegisterSchema>) {
   }
 
   const { name, email, password } = validated.data
+  const normalizedEmail = email.trim().toLowerCase()
+  const normalizedName = name.trim()
 
   try {
     const existingUser = await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     })
 
     if (existingUser) {
@@ -32,8 +35,8 @@ export async function registerUser(formData: z.infer<typeof RegisterSchema>) {
 
     await prisma.user.create({
       data: {
-        name,
-        email,
+        name: normalizedName,
+        email: normalizedEmail,
         password: hashedPassword,
         state: 'NEW', // Default state
       },
@@ -41,7 +44,11 @@ export async function registerUser(formData: z.infer<typeof RegisterSchema>) {
 
     return { success: 'User created successfully' }
   } catch (error) {
-    console.error('Registration error:', error)
-    return { error: 'Failed to create user' }
+    if ((error as Prisma.PrismaClientKnownRequestError)?.code === 'P2002') {
+      return { error: 'User already exists' }
+    }
+    const message = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Registration error:', message)
+    return { error: `Failed to create user: ${message}` }
   }
 }
