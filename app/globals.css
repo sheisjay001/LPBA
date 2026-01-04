@@ -70,7 +70,7 @@
   
   /* Secondary: Soft Gold */
   --secondary: #C2956E;
-  --secondary-foreground: #F8F9FA;
+  --secondary-foreground: #1B263B; /* Deep Blue text for better contrast on Gold */
   
   --muted: #F1F5F9;
   --muted-foreground: #64748B;

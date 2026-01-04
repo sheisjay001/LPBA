@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { CheckCircle2, Circle, Lock, PlayCircle, FileText } from "lucide-react";
@@ -98,7 +99,7 @@ export default function UserDashboard() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold font-serif text-primary tracking-tight">
-              Welcome, {session?.user?.name || "Leader"}
+              Welcome, {userData?.name || session?.user?.name || "Leader"}
             </h1>
             <p className="text-muted-foreground mt-2">Track your progress and access your exclusive resources.</p>
           </div>
