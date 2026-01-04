@@ -67,6 +67,12 @@ export default function UserDashboard() {
     return stage ? stage.step : 1;
   };
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
@@ -83,17 +89,12 @@ export default function UserDashboard() {
             <Skeleton className="h-64 col-span-2 rounded-xl" />
             <Skeleton className="h-64 rounded-xl" />
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === "unauthenticated") {
-    // If we're here, middleware missed it or client-side auth expired.
+    >
+   If we're here, middleware missed it or client-side auth expired.
     // Force a hard redirect to login.
     if (typeof window !== "undefined") {
       window.location.href = "/login";
-    }
+    }ruerpus()
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
