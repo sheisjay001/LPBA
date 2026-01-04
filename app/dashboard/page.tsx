@@ -109,74 +109,10 @@ export default function UserDashboard() {
           </Button>
         </div>
 
-        {/* Journey Progress Bar */}
-        <Card className="border-none shadow-lg bg-white/80 backdrop-blur">
-            <CardHeader>
-                <CardTitle className="text-lg font-serif">The LPBA System</CardTitle>
-                <CardDescription>Scale Influence. Automate Revenue.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <div className="relative flex items-center justify-between w-full">
-                    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 -z-10" />
-                    <div 
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-gold -z-10 transition-all duration-1000 ease-out" 
-                        style={{ width: `${((currentStep - 1) / (JOURNEY_STAGES.length - 1)) * 100}%` }}
-                    />
-                    
-                    {JOURNEY_STAGES.map((stage) => {
-                        const isCompleted = stage.step <= currentStep;
-                        const isCurrent = stage.step === currentStep;
-                        
-                        return (
-                            <div key={stage.id} className="flex flex-col items-center gap-2 bg-white px-2">
-                                <div 
-                                    className={`
-                                        w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300
-                                        ${isCompleted ? 'bg-gold border-gold text-white' : 'bg-white border-gray-300 text-gray-300'}
-                                        ${isCurrent ? 'ring-4 ring-gold/20 scale-110' : ''}
-                                    `}
-                                >
-                                    {isCompleted ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-                                </div>
-                                <span className={`text-xs font-medium hidden md:block ${isCompleted ? 'text-gold' : 'text-gray-400'}`}>
-                                    {stage.label}
-                                </span>
-                            </div>
-                        );
-                    })}
-                </div>
-            </CardContent>
-        </Card>
 
-        {/* Bonus Service: 10X Revenue Launch */}
-        <div className="grid gap-6 md:grid-cols-3">
-             <Card className="col-span-1 md:col-span-2 bg-gradient-to-br from-primary to-blue-900 text-white border-none shadow-xl">
-                 <CardHeader>
-                     <div className="flex justify-between items-start">
-                         <div>
-                             <Badge className="bg-gold text-black hover:bg-white mb-2">BONUS SERVICE</Badge>
-                             <CardTitle className="text-2xl font-serif text-white">10X Revenue Launch</CardTitle>
-                             <CardDescription className="text-gray-300">Valued at ₦2,500,000 (Complimentary)</CardDescription>
-                         </div>
-                         {isClient ? <CheckCircle2 className="h-8 w-8 text-gold" /> : <Lock className="h-6 w-6 text-gray-400" />}
-                     </div>
-                 </CardHeader>
-                 <CardContent>
-                     <p className="mb-4 text-gray-200">
-                         We supervise the launch of a marketing campaign to increase your organization’s visibility and patronage.
-                         Target: Engineer a 10x increase in monthly revenue.
-                     </p>
-                     <Button 
-                        variant={isClient ? "default" : "secondary"} 
-                        className={isClient ? "bg-gold text-black hover:bg-white" : "bg-gray-700 text-gray-400 cursor-not-allowed"}
-                        disabled={!isClient}
-                     >
-                         {isClient ? "Activate Launch" : "Unlock with Membership"}
-                     </Button>
-                 </CardContent>
-             </Card>
 
-             {/* Current Package Status */}
+        {/* Current Package Status */}
+        <div className="grid gap-6 md:grid-cols-1">
              <Card className="bg-white shadow-md">
                  <CardHeader>
                      <CardTitle className="text-lg font-serif">Current Package</CardTitle>
