@@ -71,11 +71,11 @@ export async function POST(
         `;
     }
 
-    await sendEmail({
-        to: application.user.email,
-        subject: "Congratulations! You've been accepted to LPBA",
-        html: emailHtml
-    });
+    await sendEmail(
+        application.user.email,
+        "Congratulations! You've been accepted to LPBA",
+        emailHtml
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {
