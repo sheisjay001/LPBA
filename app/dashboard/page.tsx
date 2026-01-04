@@ -101,8 +101,12 @@ export default function UserDashboard() {
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
             <h2 className="text-xl font-semibold mb-2">Session Expired</h2>
-            <p className="text-gray-500 mb-4">Redirecting you to login...</p>
-            <Button onClick={() => router.push("/login")}>Go to Login</Button>
+            <p className="text-gray-500 mb-4">
+              <Link href="/login" className="underline hover:text-primary">
+                Click here to login
+              </Link>
+            </p>
+            <Button onClick={() => window.location.href = "/login"}>Go to Login</Button>
         </div>
       </div>
     );
