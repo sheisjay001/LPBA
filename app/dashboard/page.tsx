@@ -89,18 +89,18 @@ export default function UserDashboard() {
             <Skeleton className="h-64 col-span-2 rounded-xl" />
             <Skeleton className="h-64 rounded-xl" />
           </div>
-    >
-   If we're here, middleware missed it or client-side auth expired.
-    // Force a hard redirect to login.
-    if (typeof window !== "undefined") {
-      window.location.href = "/login";
-    }ruerpus()
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
             <h2 className="text-xl font-semibold mb-2">Session Expired</h2>
             <p className="text-gray-500 mb-4">Redirecting you to login...</p>
-            <Button onClick={() => window.location.href = "/login"}>Go to Login</Button>
+            <Button onClick={() => router.push("/login")}>Go to Login</Button>
         </div>
       </div>
     );
