@@ -30,32 +30,33 @@ export default function UserDashboard() {
 
     if (session?.user?.email) {
       setLoading(true);
-      // Fetch User Data
-      fetch(`/api/user/dashboard?email=${session.user.email}`)
-        .then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch user data");
-            return res.json();
+      
+      Promise.allSettled([
+        fetch(`/api/user/dashboard?email=${session.user.email}`).then(res => {
+             if (!res.ok) throw new Error("Failed to fetch user data");
+             return res.json();
+        }),
+        fetch(`/api/user/videos?email=${session.user.email}`).then(res => {
+             if (!res.ok) throw new Error("Failed to fetch videos");
+             return res.json();
         })
-        .then((data) => setUserData(data))
-        .catch(err => {
-            console.error(err);
-            toast.error("Could not load your profile data.");
-        });
+      ]).then(([userResult, videoResult]) => {
+          if (userResult.status === 'fulfilled') {
+              setUserData(userResult.value);
+          } else {
+              console.error("User fetch failed", userResult.reason);
+              toast.error("Could not load your profile data.");
+          }
 
-      // Fetch Videos
-      fetch(`/api/user/videos?email=${session.user.email}`)
-        .then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch videos");
-            return res.json();
-        })
-        .then((data) => {
-            if (Array.isArray(data)) setVideos(data);
-        })
-        .catch(err => {
-            console.error(err);
-            toast.error("Could not load video library.");
-        })
-        .finally(() => setLoading(false));
+          if (videoResult.status === 'fulfilled' && Array.isArray(videoResult.value)) {
+              setVideos(videoResult.value);
+          } else {
+              console.error("Video fetch failed", videoResult.status === 'rejected' ? videoResult.reason : "Invalid data");
+          }
+      }).finally(() => {
+          setLoading(false);
+      });
+
     } else {
         setLoading(false);
     }
@@ -87,7 +88,22 @@ export default function UserDashboard() {
     );
   }
 
-  if (status === "unauthenticated") return null; // Middleware handles redirect
+  if (status === "unauthenticated") {
+    // If we're here, middleware missed it or client-side auth expired.
+    // Force a hard redirect to login.
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+            <h2 className="text-xl font-semibold mb-2">Session Expired</h2>
+            <p className="text-gray-500 mb-4">Redirecting you to login...</p>
+            <Button onClick={() => window.location.href = "/login"}>Go to Login</Button>
+        </div>
+      </div>
+    );
+  }
 
   const currentStep = userData ? getCurrentStep(userData.state) : 1;
   const isClient = userData?.state === 'CLIENT' || userData?.state === 'ACCEPTED';
