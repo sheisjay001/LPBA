@@ -37,22 +37,22 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-gold/80 backdrop-blur-md sticky top-0 z-50">
         <Link className="flex items-center justify-center gap-2" href="/">
-          <div className="w-8 h-8 bg-black text-white flex items-center justify-center rounded-lg font-bold font-display">L</div>
-          <span className="font-bold text-xl tracking-tight font-display">LPBA Consulting</span>
+          <div className="w-8 h-8 bg-gold text-black flex items-center justify-center rounded-lg font-bold font-display">L</div>
+          <span className="font-bold text-xl tracking-tight font-display text-black">LPBA Consulting</span>
         </Link>
         <nav className="ml-auto hidden sm:flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/assessment">
+          <Link className="text-sm font-medium hover:text-gold-dark transition-colors" href="/assessment">
             Assessment
           </Link>
-          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/application">
+          <Link className="text-sm font-medium hover:text-gold-dark transition-colors" href="/application">
             Apply
           </Link>
-          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/login">
+          <Link className="text-sm font-medium hover:text-gold-dark transition-colors" href="/login">
             Login
           </Link>
-          <Link className="text-sm font-medium hover:text-gold transition-colors" href="/register">
+          <Link className="text-sm font-medium hover:text-gold-dark transition-colors" href="/register">
             Register
           </Link>
         </nav>
@@ -134,13 +134,13 @@ export default function Home() {
               </motion.div>
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 min-w-[200px]">
                 <Link href="/assessment">
-                  <Button className="w-full sm:w-auto bg-white text-black hover:bg-gold hover:text-black text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300" size="lg">
+                  <Button className="w-full sm:w-auto bg-gold text-black hover:bg-gold-light text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300" size="lg">
                     Take Free Assessment
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <Link href="/application">
-                  <Button variant="outline" className="w-full sm:w-auto bg-transparent text-white border-white hover:bg-white hover:text-black text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300">
+                  <Button className="w-full sm:w-auto bg-gold text-black hover:bg-gold-light text-lg px-8 py-6 h-auto font-semibold rounded-full transition-all duration-300">
                     View Programs
                   </Button>
                 </Link>
@@ -166,10 +166,10 @@ export default function Home() {
               >
                 <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
-                    <div className="p-3 bg-blue-100 w-fit rounded-xl mb-4">
-                      <Zap className="h-8 w-8 text-blue-600" />
+                    <div className="p-3 bg-gold/20 w-fit rounded-xl mb-4">
+                      <Zap className="h-8 w-8 text-gold-dark" />
                     </div>
-                    <CardTitle className="text-xl font-display">Soft Skills Development</CardTitle>
+                    <CardTitle className="text-xl font-display text-gold-dark">Soft Skills Development</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
@@ -186,10 +186,10 @@ export default function Home() {
               >
                 <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
-                    <div className="p-3 bg-purple-100 w-fit rounded-xl mb-4">
-                      <Users className="h-8 w-8 text-purple-600" />
+                    <div className="p-3 bg-gold/20 w-fit rounded-xl mb-4">
+                      <Users className="h-8 w-8 text-gold-dark" />
                     </div>
-                    <CardTitle className="text-xl font-display">Marketing Strategy</CardTitle>
+                    <CardTitle className="text-xl font-display text-gold-dark">Marketing Strategy</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
@@ -206,10 +206,10 @@ export default function Home() {
               >
                 <Card className="bg-white shadow-lg border-0 h-full hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
-                    <div className="p-3 bg-green-100 w-fit rounded-xl mb-4">
-                      <CheckCircle className="h-8 w-8 text-green-600" />
+                    <div className="p-3 bg-gold/20 w-fit rounded-xl mb-4">
+                      <CheckCircle className="h-8 w-8 text-gold-dark" />
                     </div>
-                    <CardTitle className="text-xl font-display">Executive Coaching</CardTitle>
+                    <CardTitle className="text-xl font-display text-gold-dark">Executive Coaching</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
@@ -222,36 +222,45 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full py-16 md:py-24 bg-white">
+        <section className="w-full py-16 md:py-24 bg-gold/10">
           <div className="container px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">Program Packages</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display text-gold-dark">Program Packages</h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-lg mt-4">
                 To help your clients choose the right level of engagement, these tiers are structured by depth of impact—moving from foundational skills to full-scale organizational transformation.
               </p>
-              <h3 className="text-xl font-semibold mt-6 font-display">Select Your Preferred Package</h3>
+              <h3 className="text-xl font-semibold mt-6 font-display text-gold-dark">Select Your Preferred Package</h3>
             </div>
             <div className="grid gap-8 md:grid-cols-3">
                {/* Basic Package */}
-               <Card className="bg-gray-50 border h-full flex flex-col">
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-display">Basic: Foundation*</CardTitle>
+               <Card className="bg-white border border-gold/40 h-full flex flex-col">
+                  <CardHeader className="space-y-1">
+                    <CardTitle className="text-2xl font-display text-gold-dark">Basic: Foundation</CardTitle>
                     <p className="text-sm text-gray-500 font-medium">Best for Junior Staff</p>
                   </CardHeader>
                   <CardContent className="flex-1">
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-3 mb-6">
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500"/> 4 Days Intensive</li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500"/> 
-                          <span className="font-medium">Skill Mastery:</span> Acquire the essential soft skills e.g loyalty, communication, productivity and marketing etcetera.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500 mt-1"/> 
+                          <div>
+                            <span className="font-medium">Skill Mastery:</span>
+                            <p className="text-gray-600">Acquire the essential soft skills e.g loyalty, communication, productivity and marketing etcetera.</p>
+                          </div>
                         </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500"/> 
-                          <span className="font-medium">Individual Clarity:</span> Discover how to connect individual goals and strengths align with the organization, for efficiency.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500 mt-1"/> 
+                          <div>
+                            <span className="font-medium">Individual Clarity:</span>
+                            <p className="text-gray-600">Discover how to connect individual goals and strengths align with the organization, for efficiency.</p>
+                          </div>
                         </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500"/> 
-                          <span className="font-medium">Performance Optimization:</span> Identify how to be results oriented, focused and excellent.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500 mt-1"/> 
+                          <div>
+                            <span className="font-medium">Performance Optimization:</span>
+                            <p className="text-gray-600">Identify how to be results oriented, focused and excellent.</p>
+                          </div>
                         </li>
                     </ul>
                   </CardContent>
@@ -261,22 +270,22 @@ export default function Home() {
                <Card className="bg-white border-2 border-gold h-full flex flex-col relative shadow-xl md:scale-105 z-10">
                   <div className="absolute top-0 right-0 bg-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                   <CardHeader>
-                    <CardTitle className="text-2xl font-display text-primary">Standard: Acceleration</CardTitle>
+                    <CardTitle className="text-2xl font-display text-gold-dark">Standard: Acceleration</CardTitle>
                     <p className="text-sm text-gray-500 font-medium">Best for managers  between strategy and execution.</p>
                   </CardHeader>
                   <CardContent className="flex-1">
                     <ul className="space-y-2 mb-6">
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold"/> 3Months Duration</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold-dark"/> 3Months Duration</li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <CheckCircle className="h-4 w-4 text-gold-dark"/> 
                           <span className="font-medium">Team Alignment:</span> Synchronize staff performance with your brand&rsquo;s core purpose for a unified market presence.
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <CheckCircle className="h-4 w-4 text-gold-dark"/> 
                           <span className="font-medium">Operational Efficiency:</span> Implement management frameworks that reduce internal friction and speed up project delivery.
                         </li>
                         <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <CheckCircle className="h-4 w-4 text-gold-dark"/> 
                           <span className="font-medium">Sustainable Growth:</span> Build the leadership middle-layer required to support scaling revenue without owner burnout.
                         </li>
                     </ul>
@@ -284,25 +293,34 @@ export default function Home() {
                </Card>
 
                {/* Premium Package */}
-               <Card className="bg-black text-white border h-full flex flex-col">
+               <Card className="bg-black text-white border border-gold/40 h-full flex flex-col">
                   <CardHeader>
-                    <CardTitle className="text-2xl font-display text-white">Premium: Transformation</CardTitle>
+                    <CardTitle className="text-2xl font-display text-gold-dark">Premium: Transformation</CardTitle>
                     <p className="text-sm text-gray-400 font-medium">Best for executives and high-impact organizations.</p>
                   </CardHeader>
                   <CardContent className="flex-1">
                     <ul className="space-y-2 mb-6">
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-white"/> 12 Months Partnership</li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-white"/> 
-                          <span className="font-medium">Strategic Dominance:</span> Refine your marketing strategy and brand positioning to command premium market pricing.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-white mt-1"/> 
+                          <div>
+                            <span className="font-medium">Strategic Dominance:</span>
+                            <p className="text-gray-300">Refine your marketing strategy and brand positioning to command premium market pricing.</p>
+                          </div>
                         </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-white"/> 
-                          <span className="font-medium">Executive Excellence:</span> Master high-stakes decision-making through 1-on-1 coaching for founders and C-suite leaders.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-white mt-1"/> 
+                          <div>
+                            <span className="font-medium">Executive Excellence:</span>
+                            <p className="text-gray-300">Master high-stakes decision-making through 1-on-1 coaching for founders and C-suite leaders.</p>
+                          </div>
                         </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-white"/> 
-                          <span className="font-medium">Compound Revenue:</span> Integrate staff, management, and executive development into a singular engine for maximum profit.
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-white mt-1"/> 
+                          <div>
+                            <span className="font-medium">Compound Revenue:</span>
+                            <p className="text-gray-300">Integrate staff, management, and executive development into a singular engine for maximum profit.</p>
+                          </div>
                         </li>
                     </ul>
                   </CardContent>
@@ -311,7 +329,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full py-16 bg-blue-50">
+        <section className="w-full py-16 bg-gold/10">
              <div className="container px-4 md:px-6">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
@@ -322,7 +340,7 @@ export default function Home() {
                         <div className="space-y-4">
                             <div className="flex gap-4">
                                 <div className="bg-white p-3 rounded-lg shadow-sm h-fit">
-                                    <Zap className="h-6 w-6 text-gold" />
+                                    <Zap className="h-6 w-6 text-gold-dark" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg">Goal</h3>
@@ -331,7 +349,7 @@ export default function Home() {
                             </div>
                             <div className="flex gap-4">
                                 <div className="bg-white p-3 rounded-lg shadow-sm h-fit">
-                                    <CheckCircle className="h-6 w-6 text-gold" />
+                                    <CheckCircle className="h-6 w-6 text-gold-dark" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg">$2,000 ( Already Paid for You By the Company)</h3>
@@ -339,15 +357,15 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-                        <h3 className="text-xl font-bold mb-4 font-display">What You Get</h3>
+                    <div className="bg-white p-8 rounded-2xl shadow-xl border border-gold/40">
+                        <h3 className="text-xl font-bold mb-4 font-display text-gold-dark">What You Get</h3>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-green-500"/> Fully designed marketing campaign</li>
                             <li className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-green-500"/> Targeted sales strategy</li>
                             <li className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-green-500"/> Launch supervision</li>
                             <li className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-green-500"/> Utilization of newly empowered staff</li>
                         </ul>
-                        <Button className="w-full mt-8 bg-black text-white hover:bg-gold hover:text-black">Claim Your Bonus</Button>
+                        <Button className="w-full mt-8 bg-gold text-black hover:bg-gold-light">Claim Your Bonus</Button>
                     </div>
                 </div>
              </div>
@@ -355,24 +373,24 @@ export default function Home() {
 
         <section className="w-full py-16 md:py-24 bg-white">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">Training Philosophy</h2>
-            <p className="text-gray-600 mt-4">At LPBA, we believe that</p>
-            <ul className="mt-6 space-y-3 max-w-3xl">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display text-center">Training Philosophy</h2>
+            <p className="text-gray-600 mt-4 text-center mx-auto max-w-3xl">At LPBA, we believe:</p>
+            <ul className="mt-6 space-y-4 max-w-3xl mx-auto text-left">
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
-                <span>the capacity of the CEO and employees cumulatively determines the overall results and growth of the company.</span>
+                <CheckCircle className="h-5 w-5 text-gold-dark mt-0.5" />
+                <span className="leading-relaxed">The combined capacity of the CEO and employees determines company results and growth.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
-                <span>that your needs are unique , hence we customize a unique training framework for you.</span>
+                <CheckCircle className="h-5 w-5 text-gold-dark mt-0.5" />
+                <span className="leading-relaxed">Your needs are unique; we customize a training framework to fit your organization.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
-                <span>marketing and sales is the lifeline of every business, hence we teach that to all staff</span>
+                <CheckCircle className="h-5 w-5 text-gold-dark mt-0.5" />
+                <span className="leading-relaxed">Marketing and sales are the lifeline of every business; we teach them to all staff.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
-                <span>that without loyalty, organizations will fail</span>
+                <CheckCircle className="h-5 w-5 text-gold-dark mt-0.5" />
+                <span className="leading-relaxed">Without loyalty, organizations fail.</span>
               </li>
             </ul>
           </div>
@@ -389,7 +407,7 @@ export default function Home() {
              </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-4 sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6 border-t bg-gray-50">
+      <footer className="flex flex-col gap-4 sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6 border-t border-gold bg-gold/10">
         <p className="text-sm text-gray-500">© 2026 LPBA Consulting. All rights reserved.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-sm text-gray-500 hover:underline underline-offset-4" href="#">
