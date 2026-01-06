@@ -126,11 +126,10 @@ export default function Home() {
             >
               <motion.div variants={fadeInUp} className="space-y-4 max-w-3xl">
                 <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-display">
-                  Scale Your Influence. <br className="hidden sm:inline" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Automate Your Revenue.</span>
+                  Grow Your Business by Empowering You and Your Teams.
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  The Leadership Brand Positioning & Automation System designed for high-impact leaders. Qualify leads, nurture relationships, and close high-ticket offers on autopilot.
+                  Unlock your organization&rsquo;s revenue potential by aligning strategy with staff competence to maximize profit.
                 </p>
               </motion.div>
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 min-w-[200px]">
@@ -155,7 +154,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">The LPBA System</h2>
               <p className="mx-auto max-w-[800px] text-gray-500 md:text-lg mt-4">
-                We help you scale your influence and automate your revenue through a proven 3-step process designed for high-impact leaders.
+                We help organizations grow by bridging the gap between vision and performance
               </p>
             </div>
             <div className="grid gap-8 md:grid-cols-3">
@@ -170,11 +169,11 @@ export default function Home() {
                     <div className="p-3 bg-blue-100 w-fit rounded-xl mb-4">
                       <Zap className="h-8 w-8 text-blue-600" />
                     </div>
-                    <CardTitle className="text-xl font-display">Qualify Leads</CardTitle>
+                    <CardTitle className="text-xl font-display">Soft Skills Development</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
-                      Stop wasting time on unqualified prospects. Our intelligent assessment engine identifies your ideal clients and routes them directly to your offers.
+                      We equip your staff with the essential communication, emotional intelligence, problem-solving skills etc needed to execute your vision with precision.
                     </p>
                   </CardContent>
                 </Card>
@@ -190,11 +189,11 @@ export default function Home() {
                     <div className="p-3 bg-purple-100 w-fit rounded-xl mb-4">
                       <Users className="h-8 w-8 text-purple-600" />
                     </div>
-                    <CardTitle className="text-xl font-display">Nurture Relationships</CardTitle>
+                    <CardTitle className="text-xl font-display">Marketing Strategy</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
-                      Build trust at scale. Our content and branding strategies position you as the authority, nurturing leads into raving fans without you lifting a finger.
+                      We build data-driven positioning strategies that articulate your unique value, attracting high-tier clients and creating a clear path to multiplied revenue.
                     </p>
                   </CardContent>
                 </Card>
@@ -210,11 +209,11 @@ export default function Home() {
                     <div className="p-3 bg-green-100 w-fit rounded-xl mb-4">
                       <CheckCircle className="h-8 w-8 text-green-600" />
                     </div>
-                    <CardTitle className="text-xl font-display">Close High-Ticket Offers</CardTitle>
+                    <CardTitle className="text-xl font-display">Executive Coaching</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-500 leading-relaxed">
-                      Revenue on autopilot. Implement our high-conversion funnels to close premium deals consistently, freeing you to focus on high-impact leadership.
+                      We sharpen executive decision-making and strategic vision, ensuring those at the top have the clarity and mindset required to lead a scaling organization.
                     </p>
                   </CardContent>
                 </Card>
@@ -228,21 +227,32 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">Program Packages</h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-lg mt-4">
-                Tailor-made engagements to position your brand and automate your growth.
+                To help your clients choose the right level of engagement, these tiers are structured by depth of impact—moving from foundational skills to full-scale organizational transformation.
               </p>
+              <h3 className="text-xl font-semibold mt-6 font-display">Select Your Preferred Package</h3>
             </div>
             <div className="grid gap-8 md:grid-cols-3">
                {/* Basic Package */}
                <Card className="bg-gray-50 border h-full flex flex-col">
                   <CardHeader>
-                    <CardTitle className="text-2xl font-display">Basic</CardTitle>
-                    <p className="text-sm text-gray-500 font-medium">Brand Foundation</p>
+                    <CardTitle className="text-2xl font-display">Basic: Foundation*</CardTitle>
+                    <p className="text-sm text-gray-500 font-medium">Best for Junior Staff</p>
                   </CardHeader>
                   <CardContent className="flex-1">
                     <ul className="space-y-2 mb-6">
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500"/> 7 Days Intensive</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500"/> Positioning Strategy</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500"/> Self-Discovery & Meaning</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500"/> 4 Days Intensive</li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500"/> 
+                          <span className="font-medium">Skill Mastery:</span> Acquire the essential soft skills e.g loyalty, communication, productivity and marketing etcetera.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500"/> 
+                          <span className="font-medium">Individual Clarity:</span> Discover how to connect individual goals and strengths align with the organization, for efficiency.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500"/> 
+                          <span className="font-medium">Performance Optimization:</span> Identify how to be results oriented, focused and excellent.
+                        </li>
                     </ul>
                   </CardContent>
                </Card>
@@ -251,14 +261,24 @@ export default function Home() {
                <Card className="bg-white border-2 border-gold h-full flex flex-col relative shadow-xl md:scale-105 z-10">
                   <div className="absolute top-0 right-0 bg-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                   <CardHeader>
-                    <CardTitle className="text-2xl font-display text-primary">Standard</CardTitle>
-                    <p className="text-sm text-gray-500 font-medium">Growth Accelerator</p>
+                    <CardTitle className="text-2xl font-display text-primary">Standard: Acceleration</CardTitle>
+                    <p className="text-sm text-gray-500 font-medium">Best for managers  between strategy and execution.</p>
                   </CardHeader>
                   <CardContent className="flex-1">
                     <ul className="space-y-2 mb-6">
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold"/> 3 Months Duration</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold"/> Automation Setup</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold"/> Creativity & Innovation</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-gold"/> 3Months Duration</li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <span className="font-medium">Team Alignment:</span> Synchronize staff performance with your brand&rsquo;s core purpose for a unified market presence.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <span className="font-medium">Operational Efficiency:</span> Implement management frameworks that reduce internal friction and speed up project delivery.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-gold"/> 
+                          <span className="font-medium">Sustainable Growth:</span> Build the leadership middle-layer required to support scaling revenue without owner burnout.
+                        </li>
                     </ul>
                   </CardContent>
                </Card>
@@ -266,14 +286,24 @@ export default function Home() {
                {/* Premium Package */}
                <Card className="bg-black text-white border h-full flex flex-col">
                   <CardHeader>
-                    <CardTitle className="text-2xl font-display text-white">Premium</CardTitle>
-                    <p className="text-sm text-gray-400 font-medium">Market Dominance</p>
+                    <CardTitle className="text-2xl font-display text-white">Premium: Transformation</CardTitle>
+                    <p className="text-sm text-gray-400 font-medium">Best for executives and high-impact organizations.</p>
                   </CardHeader>
                   <CardContent className="flex-1">
                     <ul className="space-y-2 mb-6">
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-white"/> 12 Months Partnership</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-white"/> Full Scale Management</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-white"/> Value Inculcation</li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-white"/> 
+                          <span className="font-medium">Strategic Dominance:</span> Refine your marketing strategy and brand positioning to command premium market pricing.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-white"/> 
+                          <span className="font-medium">Executive Excellence:</span> Master high-stakes decision-making through 1-on-1 coaching for founders and C-suite leaders.
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-white"/> 
+                          <span className="font-medium">Compound Revenue:</span> Integrate staff, management, and executive development into a singular engine for maximum profit.
+                        </li>
                     </ul>
                   </CardContent>
                </Card>
@@ -304,8 +334,7 @@ export default function Home() {
                                     <CheckCircle className="h-6 w-6 text-gold" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-lg">Value: ₦2,500,000 (Complimentary)</h3>
-                                    <p className="text-gray-600">Included free of charge as a testament to our commitment to your accelerated growth.</p>
+                                    <h3 className="font-bold text-lg">$2,000 ( Already Paid for You By the Company)</h3>
                                 </div>
                             </div>
                         </div>
@@ -322,6 +351,31 @@ export default function Home() {
                     </div>
                 </div>
              </div>
+        </section>
+
+        <section className="w-full py-16 md:py-24 bg-white">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-display">Training Philosophy</h2>
+            <p className="text-gray-600 mt-4">At LPBA, we believe that</p>
+            <ul className="mt-6 space-y-3 max-w-3xl">
+              <li className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
+                <span>the capacity of the CEO and employees cumulatively determines the overall results and growth of the company.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
+                <span>that your needs are unique , hence we customize a unique training framework for you.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
+                <span>marketing and sales is the lifeline of every business, hence we teach that to all staff</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-gold mt-0.5" />
+                <span>that without loyalty, organizations will fail</span>
+              </li>
+            </ul>
+          </div>
         </section>
 
         <section className="w-full py-20 bg-black text-white text-center">
