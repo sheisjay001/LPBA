@@ -367,7 +367,9 @@ export default function Home() {
                             <li className="flex items-center gap-3"><CheckCircle className="h-5 w-5 text-green-500"/> Launch supervision</li>
                             <li className="flex items-center gap-3"><CheckCircle className="h-5 w-5 text-green-500"/> Utilization of newly empowered staff</li>
                         </ul>
-                        <Button variant="secondary" className="w-full mt-8">Claim Your Bonus</Button>
+                        <Link href="/assessment">
+                          <Button variant="secondary" className="w-full mt-8">Claim Your Bonus</Button>
+                        </Link>
                     </div>
                 </div>
              </div>
